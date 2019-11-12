@@ -15,22 +15,12 @@ const ShoppingCart = () => {
       .toFixed(2);
   };
 
-  useEffect(() => {
-    handleLocalStorage();
-  });
-  const handleLocalStorage = data => {
-    console.log("handleLocalStorage ran", cart);
-    localStorage.setItem("product-list", cart ? cart : "");
-  };
-
   return (
     <div className="shopping-cart">
       {cart.map(item => {
         return (
           <div>
             <Item key={item.id} {...item} />
-            {console.log(item.id)}
-            {handleLocalStorage(item.id)}
           </div>
         );
       })}
