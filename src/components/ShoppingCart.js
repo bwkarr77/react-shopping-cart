@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 // Components
 import Item from "./ShoppingCartItem";
@@ -15,11 +15,25 @@ const ShoppingCart = () => {
       .toFixed(2);
   };
 
+  useEffect(() => {
+    handleLocalStorage();
+  });
+  const handleLocalStorage = data => {
+    console.log("handleLocalStorage ran", cart);
+    localStorage.setItem("product-list", cart ? cart : "");
+  };
+
   return (
     <div className="shopping-cart">
-      {cart.map(item => (
-        <Item key={item.id} {...item} />
-      ))}
+      {cart.map(item => {
+        return (
+          <div>
+            <Item key={item.id} {...item} />
+            {console.log(item.id)}
+            {handleLocalStorage(item.id)}
+          </div>
+        );
+      })}
 
       <div className="shopping-cart__checkout">
         <p>Total: ${getCartTotal()}</p>
